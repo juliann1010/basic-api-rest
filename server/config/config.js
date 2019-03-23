@@ -20,7 +20,7 @@ if(process.env.NODE_ENV === 'dev'){ //Conexion local
     urlDB = 'mongodb://localhost:27017/cafe';
 }
 else{ //Conexion con mongo db Atlas
-    urlDB = 'mongodb+srv://juliann1010:u16k0I7cZcN1qaZq@cluster0-ydx6j.mongodb.net/test'
+    urlDB = process.env.MONGO_URI;
 }
 
 process.env.URLDB = urlDB;
