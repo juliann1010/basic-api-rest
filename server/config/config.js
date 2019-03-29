@@ -10,9 +10,9 @@ process.env.PORT = process.env.PORT || 3000; //Si definen esta variable en Herok
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
-// =====================
+// =============================
 // Tiempo de validez del token
-// =====================
+// =============================
 
 process.env.TOKEN_EXPIRATION_DATE = 60 * 60 * 24 * 30;
 
@@ -36,3 +36,10 @@ else{ //Conexion con mongo db Atlas
 }
 
 process.env.URLDB = urlDB;
+
+// =====================
+// Google client ID
+// =====================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || "775097927956-6sla1q68fl9dl4g7bqhnid4p1t2jimgt.apps.googleusercontent.com"
+
