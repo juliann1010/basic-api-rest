@@ -76,9 +76,9 @@ app.get('/users', verifyToken, function (req, res) {
   
   app.put('/users/:id', [verifyToken, adminRoleVerify], function (req, res) {
       var id = req.params.id;
-      let body = _.pick(req.body,['name', 'email', 'img', 'role', 'status']) ;
+      let body = _.pick(req.body,['name', 'email', 'img', 'role', 'status']); 
 
-      User.findByIdAndUpdate(id, body, {new: true, runValidators: true}, (err, updatedUser)=>{
+      User.findByIdAndUpdate(id, body, {new: true, runValidators: true, context: 'query'}, (err, updatedUser)=>{
         
         if(err){
             return res.status(500).json({
@@ -103,7 +103,7 @@ app.get('/users', verifyToken, function (req, res) {
   
   })
   
-  app.delete('/users/:id', [verifyToken, adminRoleVerify], function (req, res) {
+app.delete('/users/:id', [verifyToken, adminRoleVerify], function (req, res) {
       
     var id= req.params.id;
     let body = {
@@ -113,24 +113,26 @@ app.get('/users', verifyToken, function (req, res) {
     User.findByIdAndUpdate(id, body, {new: true}, (err,updatedUser)=>{
         if(err){
             return res.status(500).json({
-                 ok: false,
-                 message: "Data for DB wasn't sent as expected",
-                 err
-             });
-         }
+                ok: false,
+                message: "Data for DB wasn't sent as expected",
+                err
+            });
+        }
 
-         if(!updatedUser){
-             return res.status(400).json({
-                 ok: false,
-                 message: "Couldn't find project with sent ID"
-             });
-         }
+        if(!updatedUser){
+            return res.status(400).json({
+                ok: false,
+                message: "Couldn't find project with sent ID"
+            });
+        }
 
-         return res.json({
-             updatedUser
-         })
+        return res.json({
+            updatedUser
+        })
     });
-  })
+})
+
+  
 
   module.exports = app
   
